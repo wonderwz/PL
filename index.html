@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Astro Call Down话术助手 - 在线版</title>
+    <meta name="description" content="专业的亚马逊卖家话术提示工具，支持FBA、Coupon、SP等多种场景">
+    <meta name="keywords" content="亚马逊,话术,FBA,Coupon,SP,卖家工具">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .header h1 {
+            color: #00d4ff;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.8;
+            margin: 5px 0;
+        }
+
+        .main-tool {
+            background: rgba(22, 33, 62, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section h3 {
+            color: #00d4ff;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-btns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feature-btn {
+            padding: 15px 20px;
+            background: linear-gradient(45deg, #333, #555);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-btn:hover, .feature-btn.active {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .script-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .script-title {
+            color: #00d4ff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            padding: 8px 15px;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 6px;
+            color: #1a1a2e;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 212, 255, 0.4);
+        }
+
+        .script-text {
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .stage-btns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .stage-btn {
+            padding: 15px 20px;
+            background: linear-gradient(45deg, #666, #888);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .stage-btn:hover, .stage-btn.active {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: #1a1a2e;
+            transform: translateY(-2px);
+        }
+
+        .reason-section {
+            display: none;
+            margin-top: 25px;
+        }
+
+        .reason-section.show {
+            display: block;
+        }
+
+        .reason-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .reason-btn {
+            padding: 12px 15px;
+            background: linear-gradient(45deg, #444, #666);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+        }
+
+        .reason-btn:hover, .reason-btn.active {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: #1a1a2e;
+        }
+
+        .detail-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .guidance-details {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .guidance-details.show {
+            display: block;
+        }
+
+        .guidance-content {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            max-height: 300px;
+            margin-bottom: 15px;
+        }
+
+        .status-notification {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: #1a1a2e;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            border: 2px solid rgba(0, 212, 255, 0.8);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+            display: none;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: #1a1a2e;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            opacity: 0.7;
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 212, 255, 0.6);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 212, 255, 0.8);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .feature-btns {
+                grid-template-columns: 1fr;
+            }
+            
+            .stage-btns {
+                grid-template-columns: 1fr;
+            }
+            
+            .reason-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Astro Call Down 话术助手</h1>
+            <p>专业的亚马逊卖家话术提示工具</p>
+            <p>支持 FBA、Coupon、SP 等多种推广场景</p>
+        </div>
+
+        <div class="main-tool">
+            <!-- Feature选择 -->
+            <div class="section">
+                <h3>📋 Feature Selection</h3>
+                <div class="feature-btns">
+                    <button class="feature-btn active" onclick="selectFeature('FBA')">📦 FBA 亚马逊物流</button>
+                    <button class="feature-btn" onclick="selectFeature('Coupon')">🎫 Coupon 优惠券</button>
+                    <button class="feature-btn" onclick="selectFeature('SP')">📢 SP 广告推广</button>
+                </div>
+            </div>
+
+            <!-- 开场白 -->
+            <div class="script-box">
+                <div class="script-title">
+                    <span id="scriptTitle">FBA 开场白</span>
+                    <button class="copy-btn" onclick="copyOpening()">📋 复制开场白</button>
+                </div>
+                <div class="script-text" id="openingText">
+XX 您好，我是您的 XX 账户经理，现在我这边看到您的 xx 站点已经开始售卖，但是没有使用FBA亚马逊物流配送，想问一下您有计划使用 FBA 吗？
+                </div>
+            </div>
+
+            <!-- Product Stage -->
+            <div class="section">
+                <h3>🎯 Product Stage</h3>
+                <div class="stage-btns">
+                    <button class="stage-btn" onclick="selectStage('prep')">✅ Preparation (客户愿意)</button>
+                    <button class="stage-btn" onclick="selectStage('eval')">❌ Evaluation (客户不愿意)</button>
+                    <button class="stage-btn" onclick="selectStage('no-contact')">📞 Evaluation (无法联系)</button>
+                </div>
+            </div>
+
+            <!-- 状态提示区域 -->
+            <div class="status-notification" id="statusNotification">
+                <!-- 动态显示状态信息 -->
+            </div>
+
+            <!-- Reason Code -->
+            <div class="reason-section" id="reasonSection">
+                <h3>🔍 Reason Code</h3>
+                <div class="reason-list" id="reasonList"></div>
+                
+                <div class="detail-box" id="detailBox">请选择对应的Reason Code查看详细话术</div>
+                
+                <div style="margin-bottom: 20px;">
+                    <button class="copy-btn" onclick="copyDetail()">📋 复制详细话术</button>
+                </div>
+                
+                <!-- 指导材料详情区域 -->
+                <div class="guidance-details" id="guidanceDetails">
+                    <h3>📚 Guidance Material</h3>
+                    <div class="guidance-content" id="guidanceContent">
+                        <!-- 动态加载指导材料内容 -->
+                    </div>
+                    <button class="copy-btn" onclick="copyGuidance()">📋 复制指导材料</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 Astro Call Down Assistant | 专业话术提示工具</p>
+            <p>支持所有现代浏览器 | 数据本地存储，安全可靠</p>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script>
+        let currentFeature = 'FBA';
+        let currentStage = '';
+        let currentReason = '';
+
+        const scriptData = {
+            FBA: {
+                opening: "XX 您好，我是您的 XX 账户经理，现在我这边看到您的 xx 站点已经开始售卖，但是没有使用FBA亚马逊物流配送，想问一下您有计划使用 FBA 吗？",
+                reasons: {
+                    "A1": {
+                        title: "新手不了解FBA-不了解FBA的政策、优势以及操作",
+                        content: `【FBA优势】
+1）FBA产品会优先获得购物车，流量转化会更好，因为亚马逊在全球范围内有超过2亿的优质 Prime 会员，发FBA的商品是自带 Prime 标记的，能够帮助曝光、提升销量，也有数据显示，发FBA的卖家平均可以获得 20%-25% 的销售额提升；
+2）FBA配送更加便捷，我们最快可以做到当日达，这个消费者体验是非常好的；
+3）发FBA的售后效率更高，亚马逊可以提供7*24小时当地语言客户服务，不需要您安排同事排班倒时差，也不要求您的同事懂不同语言；操作也很简单，我给您准备了一份很详细的指导手册，我给您这个账号的邮箱发(了)一封邮件，里面包括了《创建货件操作流程》，(还有我的企业微信，麻烦您加一下我的微信)，后续如果您有任何发FBA相关的问题都可以随时通过微信联系到我。
+
+【drive PL】
+您现在抓紧时间发FBA的话，在店铺开售90天之内创建FBA货件，可以获得以下福利：
+1）配送费折扣：200美元亚马逊运营中心配送费优惠，以及 10% 折扣，用于前 100 件亚马逊多渠道配送产品的配送费；
+2）400美元入库配置服务费优惠 (限美国站）；
+同时还可以享受（所有加入亚马逊物流的新卖家均可享受）：
+1）免仓储费：前365天内免收仓储利用率附加费、低量库存费；
+2）限时免退货处理费：亚马逊运营中心收到首件商品后的6个月内，每个父ASIN的前20件商品免除退货处理费；
+3）自动加入亚马逊物流新品入仓优惠计划，对于发FBA的新父ASIN，亚马逊将提供平均 10% 的新品销售额返还，进一步帮助您减少费用方面的压力。`,
+                        guidance: `1）FBA All in One 一图读懂FBA-Page1.png
+2）FBA All in One一图读懂FBA-Page2.png
+3）FBA 创建货件指南：https://gs.amazon.cn/news/news-brand-240526
+4）新卖家入门大礼包：https://gs.amazon.cn/nsi?ref=as_cn_ags_prevav
+5）新卖家大礼包仪表盘: https://sellercentral.amazon.com/new-seller-incentives/dashboard
+6）亚马逊物流新品入仓优惠计划：https://gs.amazon.cn/fba/sandbox?ref=as_cn_ags_fba_sandbox_tp
+7）新品入仓计划控制面板: https://sellercentral.amazon.com/fulfillment-by-amazon/new-selection/dashboard
+8）黄金90天: https://gs.amazon.cn/perfect-launch`
+                    },
+                    "A2-费用": {
+                        title: "费用顾虑-发FBA成本太高",
+                        content: `【drive PL】
+您现在抓紧时间发FBA的话，在店铺开售90天之内创建FBA货件，可以获得以下福利：
+1）配送费折扣：200美元亚马逊运营中心配送费优惠，以及 10% 折扣，用于前 100 件亚马逊多渠道配送产品的配送费；
+2）400美元入库配置服务费优惠 (限美国站）；
+同时还可以享受（所有加入亚马逊物流的新卖家均可享受）：
+1）免仓储费：前365天内免收仓储利用率附加费、低量库存费；
+2）限时免退货处理费：亚马逊运营中心收到首件商品后的6个月内，每个父ASIN的前20件商品免除退货处理费；
+3）自动加入亚马逊物流新品入仓优惠计划，对于发FBA的新父ASIN，亚马逊将提供平均 10% 的新品销售额返还，进一步帮助您减少费用方面的压力。`,
+                        guidance: `1）新卖家入门大礼包：https://gs.amazon.cn/nsi?ref=as_cn_ags_prevav
+2）新卖家大礼包仪表盘: https://sellercentral.amazon.com/new-seller-incentives/dashboard
+3）亚马逊物流新品入仓优惠计划：https://gs.amazon.cn/fba/sandbox?ref=as_cn_ags_fba_sandbox_tp
+4）新品入仓计划控制面板: https://sellercentral.amazon.com/fulfillment-by-amazon/new-selection/dashboard
+5）黄金90天: https://gs.amazon.cn/perfect-launch`
+                    },
+                    "A2-头程": {
+                        title: "费用顾虑-头程费用太高",
+                        content: `【SEND优势】
+头程方面，推荐你了解一下亚马逊承运伙伴方案SEND，空运海运都有，价格还比市场价低5%-15%。
+
+【drive PL】
+您在开售90天内创建首个FBA货件时使用SEND还会有200美金补贴，按照SEND现在标准普货的报价，如果您发空运的话，相当于可以免费发35公斤的货物，如果发海运的话，相当于可以免费发30公斤左右；推荐您考虑一下，需要的话您可以加一下我的企业微信，我帮您直接对接Send经理，您也可以直接在后台下单，下单后Send服务商会联系您的；另外也特别提醒一下，发FBA没有最少发货量或者发货金额的要求，建议您抓紧时间安排发FBA。`,
+                        guidance: `1）SEND推文及价卡: https://mp.weixin.qq.com/s/IVsOgmXZ0Yb5LuG0MDaTzg
+2）新卖家入门大礼包：https://gs.amazon.cn/nsi?ref=as_cn_ags_prevav
+3）新卖家大礼包仪表盘: https://sellercentral.amazon.com/new-seller-incentives/dashboard
+4）SPN: #小程序://SPN服务商网络/YW6qIfMetyGtnUe`
+                    }
+                }
+            },
+            Coupon: {
+                opening: "XX 您好，我是您的 XX 账户经理，现在我这边看到您的 xx 站点已经开始售卖，但是没有设置Coupon优惠券，想问一下您有计划使用 Coupon么？咱们店铺有50美金的Coupon折扣券还没领，快要过期了",
+                reasons: {
+                    "B1": {
+                        title: "不了解优惠券，不清楚怎么设置",
+                        content: `在新卖家刚起步阶段，我们非常建议卖家做些促销来引流，提高转化，而优惠券是非常适合新卖家的促销活动，因为：
+a. 设置门槛低，适用于新品或者新起步的卖家；
+b. 可以针对特定客群展示，减少无效曝光，提高转化；
+c. 优惠券促销标志明显，增加商品被发现的可能性；
+d. 设置简单方便，只需设置满减金额或者折扣百分比；
+同时，鉴于您已经开通了广告，加上coupon的加持，会得到更好的新品推广的效果。
+
+卖家您可以进入【卖家平台】>【广告】>【优惠券】>【创建新优惠券】进行设置。
+这边方便加一下 您的企业微信么，我可以发Coupon资料给您，后续也方便沟通。`,
+                        guidance: `1）优惠券设置：https://gs.amazon.cn/zhishi/article-250205-3
+2）新卖家入门大礼包：https://gs.amazon.cn/nsi?ref=as_cn_ags_prevav
+3）新卖家大礼包仪表盘: https://sellercentral.amazon.com/new-seller-incentives/dashboard
+4）黄金90天: https://gs.amazon.cn/perfect-launch`
+                    }
+                }
+            },
+            SP: {
+                opening: "XX 您好，我是您的 XX 账户经理，现在我这边看到您的 xx 站点已经开始售卖，但是没有使用广告进行推广，想问一下您有计划开启广告推广么？咱们店铺有50美金的广告折扣券还没领，快要过期了",
+                reasons: {
+                    "C1": {
+                        title: "不清楚广告要求，不会设置",
+                        content: `广告资质要求很简单，只需要您是专业卖家，同时您的商品获得了购买按钮（黄金购物车）就可以开通广告。（二手，成人或翻新商品不能开通广告 ）
+广告活动的创建路径是【卖家后台】>【广告】>【广告活动管理】>【创建广告活动】。
+
+亚马逊现有丰富的免费资源帮助卖家快速学习广告设置策略和操作流程，这边方便加一下 您的企业微信么，我可以发广告相关资料给您，后续也方便沟通。
+您现在抓紧时间在店铺开售90天之内创建广告活动（没有活动结束时间创建的要求）的话，还可以获得50美元广告费优惠。`,
+                        guidance: `1）广告线上课程链接：https://advertising.amazon.com/zh-cn?ref_=a20m_cn_hnav_onl_tr
+2）广告学堂：https://advertising.amazon.com/academy?ref_=aaa_cn_hnav_gw&activeLocale=zh-cn
+3）新卖家入门大礼包：https://gs.amazon.cn/nsi?ref=as_cn_ags_prevav
+4）新卖家大礼包仪表盘: https://sellercentral.amazon.com/new-seller-incentives/dashboard
+5）黄金90天: https://gs.amazon.cn/perfect-launch`
+                    }
+                }
+            }
+        };
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            selectFeature('FBA');
+        });
+
+        function selectFeature(feature) {
+            currentFeature = feature;
+            currentStage = '';
+            currentReason = '';
+            
+            // 更新按钮状态
+            document.querySelectorAll('.feature-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 更新开场白
+            const titles = {
+                'FBA': 'FBA 开场白',
+                'Coupon': 'Coupon 开场白',
+                'SP': 'SP 开场白'
+            };
+            document.getElementById('scriptTitle').textContent = titles[feature];
+            document.getElementById('openingText').textContent = scriptData[feature].opening;
+            
+            // 重置stage按钮状态
+            document.querySelectorAll('.stage-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 隐藏reason section和状态提示
+            document.getElementById('reasonSection').classList.remove('show');
+            document.getElementById('statusNotification').style.display = 'none';
+        }
+
+        function selectStage(stage) {
+            currentStage = stage;
+            
+            // 更新按钮状态
+            document.querySelectorAll('.stage-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 隐藏状态提示区域
+            document.getElementById('statusNotification').style.display = 'none';
+            
+            if (stage === 'prep') {
+                document.getElementById('reasonSection').classList.remove('show');
+                showStatusNotification('✅ 客户愿意使用，无需后续话术！');
+            } else if (stage === 'eval') {
+                document.getElementById('reasonSection').classList.add('show');
+                loadReasons(currentFeature);
+            } else if (stage === 'no-contact') {
+                document.getElementById('reasonSection').classList.remove('show');
+                showStatusNotification('📝 Status Category: 选择 Seller unresponsive/unreachable');
+            }
+        }
+
+        function showStatusNotification(message) {
+            const statusNotification = document.getElementById('statusNotification');
+            statusNotification.textContent = message;
+            statusNotification.style.display = 'block';
+        }
+
+        function loadReasons(feature) {
+            const reasonList = document.getElementById('reasonList');
+            reasonList.innerHTML = '';
+            
+            // 隐藏状态提示区域
+            document.getElementById('statusNotification').style.display = 'none';
+            
+            if (scriptData[feature] && scriptData[feature].reasons) {
+                Object.keys(scriptData[feature].reasons).forEach(code => {
+                    const reason = scriptData[feature].reasons[code];
+                    const btn = document.createElement('button');
+                    btn.className = 'reason-btn';
+                    btn.textContent = `${code}: ${reason.title}`;
+                    btn.onclick = () => selectReason(code);
+                    reasonList.appendChild(btn);
+                });
+            }
+            
+            document.getElementById('detailBox').textContent = '请选择对应的Reason Code查看详细话术';
+            
+            // 隐藏指导材料详情
+            document.getElementById('guidanceDetails').classList.remove('show');
+        }
+
+        function selectReason(code) {
+            currentReason = code;
+            
+            // 更新按钮状态
+            document.querySelectorAll('.reason-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            if (scriptData[currentFeature] && scriptData[currentFeature].reasons[code]) {
+                const reason = scriptData[currentFeature].reasons[code];
+                document.getElementById('detailBox').textContent = reason.content;
+                
+                // 显示指导材料详情
+                const guidanceDetails = document.getElementById('guidanceDetails');
+                const guidanceContent = document.getElementById('guidanceContent');
+                
+                if (reason.guidance) {
+                    guidanceContent.textContent = reason.guidance;
+                    guidanceDetails.classList.add('show');
+                } else {
+                    guidanceContent.textContent = '请参考相关链接获取指导材料。';
+                    guidanceDetails.classList.add('show');
+                }
+            }
+        }
+
+        function copyOpening() {
+            const text = document.getElementById('openingText').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('开场白已复制到剪贴板！');
+            }).catch(() => {
+                showNotification('复制失败，请手动复制');
+            });
+        }
+
+        function copyDetail() {
+            const text = document.getElementById('detailBox').textContent;
+            if (text && text !== '请选择对应的Reason Code查看详细话术') {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification('详细话术已复制到剪贴板！');
+                }).catch(() => {
+                    showNotification('复制失败，请手动复制');
+                });
+            } else {
+                showNotification('请先选择Reason Code！');
+            }
+        }
+
+        function copyGuidance() {
+            const guidanceText = document.getElementById('guidanceContent').textContent;
+            if (guidanceText && guidanceText !== '请参考相关链接获取指导材料。') {
+                navigator.clipboard.writeText(guidanceText).then(() => {
+                    showNotification('指导材料已复制到剪贴板！');
+                }).catch(() => {
+                    showNotification('复制失败，请手动复制');
+                });
+            } else {
+                showNotification('请参考相关链接获取指导材料！');
+            }
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
